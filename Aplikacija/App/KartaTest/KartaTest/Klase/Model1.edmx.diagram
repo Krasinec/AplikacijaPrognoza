@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b23b76adc3c14ad7be6f50d95eef3c3b" Name="Diagram1">
+        <EntityTypeShape EntityType="BazaVremenskaPrognozaModel.Gradovi" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BazaVremenskaPrognozaModel.Prognoza" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BazaVremenskaPrognozaModel.Statistika" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="BazaVremenskaPrognozaModel.FK_Prognoza_Gradovi" ManuallyRouted="false" />
+        <AssociationConnector Association="BazaVremenskaPrognozaModel.FK_Statistika_Gradovi" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

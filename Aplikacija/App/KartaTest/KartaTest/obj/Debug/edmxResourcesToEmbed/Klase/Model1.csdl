@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BazaVremenskaPrognozaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Gradovi">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="imeGrad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Prognoza" Relationship="Self.FK_Prognoza_Gradovi" FromRole="Gradovi" ToRole="Prognoza" />
+    <NavigationProperty Name="Statistika" Relationship="Self.FK_Statistika_Gradovi" FromRole="Gradovi" ToRole="Statistika" />
+  </EntityType>
+  <EntityType Name="Prognoza">
+    <Key>
+      <PropertyRef Name="datum" />
+      <PropertyRef Name="grad" />
+    </Key>
+    <Property Name="datum" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="grad" Type="Int32" Nullable="false" />
+    <Property Name="temperatura" Type="Double" Nullable="false" />
+    <Property Name="vlaznost" Type="Double" Nullable="false" />
+    <Property Name="brzinaVjetra" Type="Double" Nullable="false" />
+    <Property Name="smjerVjetra" Type="Double" Nullable="false" />
+    <Property Name="vrijeme" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="kisa" Type="Double" Nullable="false" />
+    <Property Name="snijeg" Type="Double" Nullable="false" />
+    <Property Name="ikona" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Gradovi" Relationship="Self.FK_Prognoza_Gradovi" FromRole="Prognoza" ToRole="Gradovi" />
+  </EntityType>
+  <EntityType Name="Statistika">
+    <Key>
+      <PropertyRef Name="datum" />
+      <PropertyRef Name="grad" />
+    </Key>
+    <Property Name="datum" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="grad" Type="Int32" Nullable="false" />
+    <Property Name="temperatura" Type="Double" Nullable="false" />
+    <Property Name="pritisak" Type="Double" Nullable="false" />
+    <Property Name="vlaznost" Type="Double" Nullable="false" />
+    <Property Name="kisa" Type="Double" Nullable="false" />
+    <Property Name="snijeg" Type="Double" Nullable="false" />
+    <Property Name="brzinaVjetra" Type="Double" Nullable="false" />
+    <Property Name="smjerVjetra" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Gradovi" Relationship="Self.FK_Statistika_Gradovi" FromRole="Statistika" ToRole="Gradovi" />
+  </EntityType>
+  <Association Name="FK_Prognoza_Gradovi">
+    <End Role="Gradovi" Type="Self.Gradovi" Multiplicity="1" />
+    <End Role="Prognoza" Type="Self.Prognoza" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gradovi">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Prognoza">
+        <PropertyRef Name="grad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Statistika_Gradovi">
+    <End Role="Gradovi" Type="Self.Gradovi" Multiplicity="1" />
+    <End Role="Statistika" Type="Self.Statistika" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gradovi">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Statistika">
+        <PropertyRef Name="grad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BazaVremProgEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Gradovi" EntityType="Self.Gradovi" />
+    <EntitySet Name="Prognoza" EntityType="Self.Prognoza" />
+    <EntitySet Name="Statistika" EntityType="Self.Statistika" />
+    <AssociationSet Name="FK_Prognoza_Gradovi" Association="Self.FK_Prognoza_Gradovi">
+      <End Role="Gradovi" EntitySet="Gradovi" />
+      <End Role="Prognoza" EntitySet="Prognoza" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Statistika_Gradovi" Association="Self.FK_Statistika_Gradovi">
+      <End Role="Gradovi" EntitySet="Gradovi" />
+      <End Role="Statistika" EntitySet="Statistika" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,105 @@
+﻿@model KartaTest.Models.ModelZaPrikazStat
+
+@{
+    ViewBag.Title = "Prikaz";
+}
+
+<h2>Prikaz</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Statistika Forma</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.forma.grad, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.forma.grad, Model.gradovi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.forma.grad, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.forma.podatakStat, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.forma.podatakStat, Model.podatakStat, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.forma.podatakStat, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.forma.statistika, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.forma.statistika, Model.statistika, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.forma.statistika, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.forma.statistikaZa, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.forma.statistikaZa, Model.statistikaZa, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.forma.statistikaZa, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.forma.godina, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.forma.godina, Model.godine, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.forma.godina, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.forma.mjesec, htmlAttributes: new { @class = "control-label col-md-2", id = "mjesecLab", @style = "display:none;" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.forma.mjesec, new { htmlAttributes = new { @class = "form-control", @style = "display:none;" } })
+                @Html.ValidationMessageFor(model => model.forma.mjesec, "", new { @class = "text-danger",@style = "display:none;",id = "mjesecErr"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Potvrdi" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@{
+    if (Model.rezultat != null)
+    {
+        <h3>@Model.rezultat.grad</h3>
+        <h3>@Model.rezultat.statistika</h3>
+        <h5>Ako je rezultat redka 0 to najčešće znači da ne postoje podaci za traženu statistiku.</h5>
+        <table class="table" style="background-color:aquamarine">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.rezultat.datumi)
+                </th>
+                <th>
+                    @Html.DisplayFor(model => model.rijecnik[Model.rezultat.podatak])
+                </th>
+            </tr>
+            @for (int i = 0; i < Model.rezultat.rezultati.Count(); i++)
+            {
+            <tr>
+
+                <td>
+                @Html.DisplayFor(modelItem => Model.rezultat.datumi[i])
+                </td>
+                <td>
+                @Html.DisplayFor(modelItem => Model.rezultat.rezultati[i])
+                </td>
+            </tr>
+            }
+        </table>
+    }
+}
+
+
+                @section Scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
+                    <script src="~/Scripts/JSzaStat.js"></script>
+                }

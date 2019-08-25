@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BazaVremenskaPrognozaModelStoreContainer" CdmEntityContainer="BazaVremProgEntities">
+    <EntitySetMapping Name="Gradovi">
+      <EntityTypeMapping TypeName="BazaVremenskaPrognozaModel.Gradovi">
+        <MappingFragment StoreEntitySet="Gradovi">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="imeGrad" ColumnName="imeGrad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Prognoza">
+      <EntityTypeMapping TypeName="BazaVremenskaPrognozaModel.Prognoza">
+        <MappingFragment StoreEntitySet="Prognoza">
+          <ScalarProperty Name="datum" ColumnName="datum" />
+          <ScalarProperty Name="grad" ColumnName="grad" />
+          <ScalarProperty Name="temperatura" ColumnName="temperatura" />
+          <ScalarProperty Name="vlaznost" ColumnName="vlaznost" />
+          <ScalarProperty Name="brzinaVjetra" ColumnName="brzinaVjetra" />
+          <ScalarProperty Name="smjerVjetra" ColumnName="smjerVjetra" />
+          <ScalarProperty Name="vrijeme" ColumnName="vrijeme" />
+          <ScalarProperty Name="kisa" ColumnName="kisa" />
+          <ScalarProperty Name="snijeg" ColumnName="snijeg" />
+          <ScalarProperty Name="ikona" ColumnName="ikona" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Statistika">
+      <EntityTypeMapping TypeName="BazaVremenskaPrognozaModel.Statistika">
+        <MappingFragment StoreEntitySet="Statistika">
+          <ScalarProperty Name="datum" ColumnName="datum" />
+          <ScalarProperty Name="grad" ColumnName="grad" />
+          <ScalarProperty Name="temperatura" ColumnName="temperatura" />
+          <ScalarProperty Name="pritisak" ColumnName="pritisak" />
+          <ScalarProperty Name="vlaznost" ColumnName="vlaznost" />
+          <ScalarProperty Name="kisa" ColumnName="kisa" />
+          <ScalarProperty Name="snijeg" ColumnName="snijeg" />
+          <ScalarProperty Name="brzinaVjetra" ColumnName="brzinaVjetra" />
+          <ScalarProperty Name="smjerVjetra" ColumnName="smjerVjetra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

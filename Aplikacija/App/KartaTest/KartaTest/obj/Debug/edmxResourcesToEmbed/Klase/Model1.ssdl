@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BazaVremenskaPrognozaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Gradovi">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="imeGrad" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Prognoza">
+    <Key>
+      <PropertyRef Name="datum" />
+      <PropertyRef Name="grad" />
+    </Key>
+    <Property Name="datum" Type="datetime" Nullable="false" />
+    <Property Name="grad" Type="int" Nullable="false" />
+    <Property Name="temperatura" Type="float" Nullable="false" />
+    <Property Name="vlaznost" Type="float" Nullable="false" />
+    <Property Name="brzinaVjetra" Type="float" Nullable="false" />
+    <Property Name="smjerVjetra" Type="float" Nullable="false" />
+    <Property Name="vrijeme" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="kisa" Type="float" Nullable="false" />
+    <Property Name="snijeg" Type="float" Nullable="false" />
+    <Property Name="ikona" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Statistika">
+    <Key>
+      <PropertyRef Name="datum" />
+      <PropertyRef Name="grad" />
+    </Key>
+    <Property Name="datum" Type="datetime" Nullable="false" />
+    <Property Name="grad" Type="int" Nullable="false" />
+    <Property Name="temperatura" Type="float" Nullable="false" />
+    <Property Name="pritisak" Type="float" Nullable="false" />
+    <Property Name="vlaznost" Type="float" Nullable="false" />
+    <Property Name="kisa" Type="float" Nullable="false" />
+    <Property Name="snijeg" Type="float" Nullable="false" />
+    <Property Name="brzinaVjetra" Type="float" Nullable="false" />
+    <Property Name="smjerVjetra" Type="float" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Prognoza_Gradovi">
+    <End Role="Gradovi" Type="Self.Gradovi" Multiplicity="1" />
+    <End Role="Prognoza" Type="Self.Prognoza" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gradovi">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Prognoza">
+        <PropertyRef Name="grad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Statistika_Gradovi">
+    <End Role="Gradovi" Type="Self.Gradovi" Multiplicity="1" />
+    <End Role="Statistika" Type="Self.Statistika" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gradovi">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Statistika">
+        <PropertyRef Name="grad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BazaVremenskaPrognozaModelStoreContainer">
+    <EntitySet Name="Gradovi" EntityType="Self.Gradovi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Prognoza" EntityType="Self.Prognoza" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Statistika" EntityType="Self.Statistika" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Prognoza_Gradovi" Association="Self.FK_Prognoza_Gradovi">
+      <End Role="Gradovi" EntitySet="Gradovi" />
+      <End Role="Prognoza" EntitySet="Prognoza" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Statistika_Gradovi" Association="Self.FK_Statistika_Gradovi">
+      <End Role="Gradovi" EntitySet="Gradovi" />
+      <End Role="Statistika" EntitySet="Statistika" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
